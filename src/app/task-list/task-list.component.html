@@ -1,1 +1,46 @@
-<p>task-list works!</p>
+<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg mx-auto mt-10">
+
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Meine Aufgabenliste (Angular)</h1>
+
+  <div class="flex mb-4">
+      <input
+          type="text"
+          placeholder="Neue Aufgabe hinzufügen..."
+          class="flex-grow p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+          [(ngModel)]="newTaskText"  (keyup.enter)="addTask()"  />
+      <button
+          class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-r-lg font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 disabled:opacity-60 disabled:cursor-not-allowed"
+          (click)="addTask()"       [disabled]="!newTaskText.trim()" >
+          Hinzufügen
+      </button>
+  </div>
+
+  <div class="space-y-3">
+
+      @for (task of tasks; track task.id) {  <div
+          class="task-item flex items-center justify-between bg-white p-3 rounded shadow border border-gray-200 hover:bg-gray-50 transition duration-150"
+          [class.completed]="task.completed" >
+            <div class="flex items-center flex-grow mr-3"> <input
+                    type="checkbox"
+                    class="form-checkbox h-5 w-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
+                    [checked]="task.completed"           (change)="toggleCompletion(task.id)" >
+                <span class="task-text text-gray-700 ml-3">{{ task.text }}</span> </div>
+            <button
+                class="text-red-500 hover:text-red-700 transition duration-150 focus:outline-none flex-shrink-0" (click)="deleteTask(task.id)" aria-label="Aufgabe löschen" >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+      } @empty {
+        <p class="text-center text-gray-500 italic py-4">Super! Keine offenen Aufgaben.</p>
+      }
+
+  </div>
+
+  <div class="mt-6 text-center text-gray-500 text-sm">
+      <p>
+         {{ activeTasksCount }} aktive Aufgabe(n) </p>
+  </div>
+
+</div>

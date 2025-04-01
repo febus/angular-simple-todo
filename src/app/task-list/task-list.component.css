@@ -1,0 +1,18 @@
+/* Style für durchgestrichene erledigte Aufgaben */
+/* :host stellt sicher, dass der Style nur für dieses Component gilt */
+/* ::ng-deep kann nötig sein, wenn die ViewEncapsulation stört, aber besser ist es, die Klasse direkt richtig zu setzen */
+
+/* Diese Variante funktioniert gut, wenn '.completed' auf dem div.todo-item ist */
+:host .todo-item.completed .task-text {
+  text-decoration: line-through;
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+/* Optional: Styling für den deaktivierten Button */
+:host button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Optional: Styling für die Checkbox, falls Tailwind Forms Plugin nicht genutzt wird */
+/* :host input[type="checkbox"] { ... } */
